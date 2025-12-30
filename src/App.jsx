@@ -95,44 +95,54 @@ function App() {
 
 // Отдельный компонент для карточки, чтобы не лагало
 function MediaCard({ item, index }) {
-  const isEven = index % 2 === 0
-  
+  const isEven = index % 2 === 0;
+
+  // Функция для получения правильного пути к картинке
+  const getImageUrl = (path) => {
+    if (item.type === 'video') return path; // Видео из public берется по прямой ссылке
+    // Для фото из assets
+    const name = path.split('/').pop(); // Достаем '1.jpg' из 'src/assets/1.jpg'
+    return new URL(`./assets/${name}`, import.meta.url).href;
+  };
+
   return (
     <motion.div 
-      initial={{ opacity: 0, x: isEven ? -100 : 100 }}
+      initial={{ opacity: 0, x: isEven ? -50 : 50 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, type: "spring" }}
-      className={`flex flex-col ${isEven ? 'items-start' : 'items-end'}`}
+      transition={{ duration: 0.8 }}
+      className={`flex flex-col ${isEven ? 'items-start' : 'items-end'} w-full mb-20`}
     >
-      <div className="relative group max-w-[90%] md:max-w-[70%]">
+      <div className={`relative group w-full md:max-w-[70%] ${isEven ? 'md:pr-10' : 'md:pl-10'}`}>
         {item.type === 'photo' ? (
-          <motion.img 
-            whileHover={{ scale: 1.05 }}
-            src={item.src} 
+          <img 
+            src={getImageUrl(item.src)} 
             alt={item.caption}
-            className="rounded-2xl shadow-2xl border border-white/10"
+            className="w-full h-auto rounded-2xl shadow-2xl border border-white/10 object-cover"
+            loading="lazy"
           />
         ) : (
           <video 
             src={item.src} 
             autoPlay loop muted playsInline 
-            className="rounded-2xl shadow-2xl border border-white/10"
+            className="w-full h-auto rounded-2xl shadow-2xl border border-white/10"
           />
         )}
         
         {item.caption && (
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className={`mt-4 p-4 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 ${isEven ? 'text-left' : 'text-right'}`}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className={`mt-6 p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/5 ${isEven ? 'text-left' : 'text-right'}`}
           >
-            <p className="text-lg md:text-xl font-medium text-gray-200">{item.caption}</p>
+            <p className="text-lg md:text-2xl font-light tracking-wide text-gray-200">
+              {item.caption}
+            </p>
           </motion.div>
         )}
       </div>
     </motion.div>
-  )
+  );
 }
 
 export default App
