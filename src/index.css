@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+/* Gallery tweaks */
+.shadow-2xl { box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
+.backdrop-blur-sm { backdrop-filter: blur(6px); }
+.group-hover\:scale-105:hover { transform: scale(1.05); }
+
+/* Make images look cinematic */
+.rounded-2xl { border-radius: 1rem; }
+
+/* Nice small responsive tweaks */
+@media (min-width: 768px) {
+	.md\:max-w-\[70\%\] { max-width: 70%; }
+}
