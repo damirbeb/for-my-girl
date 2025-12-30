@@ -53,17 +53,38 @@ function App() {
             <ProgressBar scaleX={scaleX} />
 
             <div className="max-w-3xl mx-auto px-6 py-24 flex flex-col items-center">
-              <header className="h-screen flex items-center justify-center text-center">
+              <header className="h-screen flex items-center justify-center text-center px-6">
                 <motion.div
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1 }}
+                  className="w-full"
                 >
-                  <h2 className="text-3xl md:text-5xl font-light italic text-gray-400 leading-relaxed">
-                    «Тони Старк собрал мини-реактор в яме... <br/>
-                    <span className="text-white not-italic font-bold">а я собрал это для тебя»</span>
-                  </h2>
-                  <p className="mt-8 animate-bounce text-gray-400 text-sm tracking-wide uppercase">Листай вниз</p>
+                  <motion.h2 
+                    className="text-4xl md:text-7xl font-bold mb-6 leading-tight"
+                    animate={{ backgroundPosition: ['0%', '100%'] }}
+                    transition={{ duration: 3, repeat: Infinity, repeatType: 'reverse' }}
+                    style={{
+                      backgroundImage: 'linear-gradient(90deg, rgb(244, 63, 94), rgb(251, 146, 60), rgb(244, 63, 94))',
+                      backgroundSize: '200% auto',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
+                    }}
+                  >
+                    Тони Старк собрал<br/>мини-реактор в яме...
+                  </motion.h2>
+                  <motion.p 
+                    className="text-xl md:text-3xl font-light text-white mt-8 mb-4"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5, duration: 1 }}
+                  >
+                    а я собрал это для тебя
+                  </motion.p>
+                  <motion.p className="mt-12 text-gray-400 text-sm tracking-widest uppercase" animate={{ y: [0, 12, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+                    ↓ Листай вниз ↓
+                  </motion.p>
                 </motion.div>
               </header>
 

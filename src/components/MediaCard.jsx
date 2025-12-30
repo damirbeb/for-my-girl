@@ -66,7 +66,7 @@ export default function MediaCard({ item, index, onVideoPlay, onVideoPause }) {
           <img
             src={getImageUrl(item.src)}
             alt={item.caption}
-            className="w-full h-auto max-h-[60vh] rounded-2xl shadow-2xl border border-white/10 object-contain transform transition-transform duration-300 group-hover:scale-[1.02] mx-auto"
+            className="w-full h-auto max-h-[45vh] rounded-2xl shadow-2xl border border-white/10 object-contain transform transition-transform duration-300 group-hover:scale-[1.02] mx-auto"
             loading="lazy"
           />
         ) : (
@@ -79,7 +79,7 @@ export default function MediaCard({ item, index, onVideoPlay, onVideoPause }) {
               loop
               playsInline
               preload="metadata"
-              className="w-full h-auto max-h-[60vh] rounded-2xl shadow-2xl border border-white/10 bg-black cursor-pointer object-contain mx-auto block"
+              className="w-full h-auto max-h-[45vh] rounded-2xl shadow-2xl border border-white/10 bg-black cursor-pointer object-contain mx-auto block"
               onClick={() => {
                 const v = videoRef.current
                 if (!v) return
@@ -101,7 +101,7 @@ export default function MediaCard({ item, index, onVideoPlay, onVideoPause }) {
             className={`mt-6 p-4 bg-gradient-to-r from-black/40 to-black/20 backdrop-blur-sm rounded-xl border border-white/5 text-center`}
           >
             <p className="caption">
-              “{item.caption}”
+              {item.caption}
             </p>
           </motion.div>
         )}
