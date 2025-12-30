@@ -21,7 +21,7 @@ function App() {
   const startSurprise = () => {
     setIsStarted(true)
     if (audioRef.current) {
-      audioRef.current.volume = 1
+      audioRef.current.volume = 0.6
       audioRef.current.play().catch(e => console.log("Браузер блочит звук:", e))
     }
   }
@@ -61,35 +61,25 @@ function App() {
                   className="w-full"
                 >
                   <motion.h2 
-                    className="text-4xl md:text-6xl font-bold mb-4 leading-tight"
+                    className="text-7xl md:text-9xl font-black mb-6 leading-tight"
                     animate={{ backgroundPosition: ['0%', '100%'] }}
                     transition={{ duration: 3, repeat: Infinity, repeatType: 'reverse' }}
                     style={{
-                      backgroundImage: 'linear-gradient(90deg, rgb(244, 63, 94), rgb(251, 146, 60))',
+                      backgroundImage: 'linear-gradient(90deg, rgb(244, 63, 94), rgb(251, 146, 60), rgb(244, 63, 94))',
                       backgroundSize: '200% auto',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text'
+                      backgroundClip: 'text',
+                      letterSpacing: '-0.02em'
                     }}
                   >
                     Лучшие моменты
                   </motion.h2>
-                  <motion.p 
-                    className="text-lg md:text-2xl font-light text-white mt-4 mb-4"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.4, duration: 0.9 }}
-                  >
-                    Коллекция наших фото и видео
-                  </motion.p>
-                  <motion.p className="mt-12 text-gray-400 text-sm tracking-widest uppercase" animate={{ y: [0, 12, 0] }} transition={{ duration: 2, repeat: Infinity }}>
-                    ↓ Листай вниз ↓
-                  </motion.p>
                 </motion.div>
               </header>
 
               {/* Рендерим нашу сотку */}
-              <div className="space-y-12 md:space-y-20">
+              <div className="space-y-20 md:space-y-32">
                 {mediaItems.map((item, index) => (
                   <MediaCard
                     key={item.id}

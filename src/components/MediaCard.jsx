@@ -79,47 +79,52 @@ export default function MediaCard({ item, index, onVideoPlay, onVideoPause }) {
       className={`flex flex-col items-center w-full mb-16`}
     >
       <div className={`relative group w-full md:max-w-2xl overflow-hidden mx-auto py-2`} style={{maxWidth: 760}}>
+        {/* Media card: centers content and keeps proportions */}
         {item.type === 'photo' ? (
           <div
-            className="w-full rounded-2xl shadow-2xl border border-white/10 overflow-hidden mx-auto"
-            style={{ maxWidth: 720, background: 'linear-gradient(180deg,#ffffff06,#00000006)', height: 'clamp(180px, 28vh, 360px)' }}
+            className="w-full rounded-2xl shadow-2xl overflow-hidden mx-auto"
+            style={{ maxWidth: 720, background: '#0b0b0b', height: 'auto' }}
           >
-            <img
-              src={getImageUrl(item.src)}
-              alt={item.caption}
-              className="rounded-2xl transform transition-transform duration-300 group-hover:scale-[1.02]"
-              loading="lazy"
-              style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', maxWidth: '720px' }}
-            />
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 8, background: 'transparent' }}>
+              <img
+                src={getImageUrl(item.src)}
+                alt={item.caption}
+                className="rounded-2xl transform transition-transform duration-300 group-hover:scale-[1.02]"
+                loading="lazy"
+                style={{ display: 'block', maxWidth: '100%', width: '100%', height: 'auto', objectFit: 'contain' }}
+              />
+            </div>
           </div>
         ) : (
           <div
-            className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 mx-auto"
+            className="relative rounded-2xl overflow-hidden shadow-2xl mx-auto"
             style={{ maxWidth: 720, background: '#000' }}
           >
-            <video
-              ref={videoRef}
-              src={resolvePublicPath(item.src)}
-              autoPlay
-              muted
-              loop
-              playsInline
-              controls
-              preload="metadata"
-              poster={getVideoPoster(item.src)}
-              className="bg-black cursor-pointer block"
-              style={{ width: '100%', height: 'clamp(180px, 28vh, 360px)', maxWidth: '720px', display: 'block', objectFit: 'cover' }}
-              onClick={() => {
-                const v = videoRef.current
-                if (!v) return
-                if (v.paused) {
-                  v.muted = false
-                  v.play().catch(() => {})
-                } else {
-                  v.pause()
-                }
-              }}
-            />
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000' }}>
+              <video
+                ref={videoRef}
+                src={resolvePublicPath(item.src)}
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls
+                preload="metadata"
+                poster={getVideoPoster(item.src)}
+                className="bg-black cursor-pointer block"
+                style={{ width: '100%', height: 'auto', maxWidth: '720px', display: 'block', objectFit: 'contain' }}
+                onClick={() => {
+                  const v = videoRef.current
+                  if (!v) return
+                  if (v.paused) {
+                    v.muted = false
+                    v.play().catch(() => {})
+                  } else {
+                    v.pause()
+                  }
+                }}
+              />
+            </div>
           </div>
         )}
 
@@ -127,9 +132,10 @@ export default function MediaCard({ item, index, onVideoPlay, onVideoPause }) {
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className={`mt-6 p-4 bg-gradient-to-r from-black/40 to-black/20 backdrop-blur-sm rounded-xl border border-white/5 text-center`}
+            className={`p-4 bg-gradient-to-r from-black/40 to-black/20 backdrop-blur-sm rounded-xl border border-white/5 text-center`}
+            style={{ maxWidth: 720, margin: '4px auto 0' }}
           >
-            <p className="caption">
+            <p className="caption" style={{ margin: 0, textAlign: 'center', fontSize: 18 }}>
               {item.caption}
             </p>
           </motion.div>
