@@ -42,8 +42,8 @@ function App() {
   const handleVideoPause = () => setPlayingVideos(n => Math.max(0, n - 1))
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-red-500">
-      <audio ref={audioRef} loop src="/sounds/main-music.mp3" />
+    <div className="min-h-screen text-white font-sans selection:bg-red-500 relative gallery-bg">
+      <audio ref={audioRef} loop src={`${import.meta.env.BASE_URL}sounds/main-music.mp3`} />
 
       <AnimatePresence>
         {!isStarted ? (
@@ -61,26 +61,26 @@ function App() {
                   className="w-full"
                 >
                   <motion.h2 
-                    className="text-4xl md:text-7xl font-bold mb-6 leading-tight"
+                    className="text-4xl md:text-6xl font-bold mb-4 leading-tight"
                     animate={{ backgroundPosition: ['0%', '100%'] }}
                     transition={{ duration: 3, repeat: Infinity, repeatType: 'reverse' }}
                     style={{
-                      backgroundImage: 'linear-gradient(90deg, rgb(244, 63, 94), rgb(251, 146, 60), rgb(244, 63, 94))',
+                      backgroundImage: 'linear-gradient(90deg, rgb(244, 63, 94), rgb(251, 146, 60))',
                       backgroundSize: '200% auto',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                       backgroundClip: 'text'
                     }}
                   >
-                    Тони Старк собрал<br/>мини-реактор в яме...
+                    Лучшие моменты
                   </motion.h2>
                   <motion.p 
-                    className="text-xl md:text-3xl font-light text-white mt-8 mb-4"
+                    className="text-lg md:text-2xl font-light text-white mt-4 mb-4"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 0.5, duration: 1 }}
+                    transition={{ delay: 0.4, duration: 0.9 }}
                   >
-                    а я собрал это для тебя
+                    Коллекция наших фото и видео
                   </motion.p>
                   <motion.p className="mt-12 text-gray-400 text-sm tracking-widest uppercase" animate={{ y: [0, 12, 0] }} transition={{ duration: 2, repeat: Infinity }}>
                     ↓ Листай вниз ↓

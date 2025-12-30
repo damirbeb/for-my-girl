@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 export default function MediaCard({ item, index, onVideoPlay, onVideoPause }) {
@@ -10,6 +10,23 @@ export default function MediaCard({ item, index, onVideoPlay, onVideoPause }) {
     const name = path.split('/').pop()
     return new URL(`../assets/${name}`, import.meta.url).href
   }
+
+  const getVideoPoster = (path) => {
+    const name = path.split('/').pop().replace(/\.mp4$/, '.jpg')
+    try {
+      return new URL(`../assets/${name}`, import.meta.url).href
+    } catch (e) {
+      return ''
+    }
+  }
+
+  const resolvePublicPath = (p) => {
+    if (!p) return p
+    if (p.startsWith('/')) return import.meta.env.BASE_URL + p.replace(/^\//, '')
+    return p
+  }
+
+  const [isPlaying, setIsPlaying] = useState(false)
 
   useEffect(() => {
     const v = videoRef.current
@@ -61,25 +78,37 @@ export default function MediaCard({ item, index, onVideoPlay, onVideoPause }) {
       transition={{ duration: 0.7 }}
       className={`flex flex-col items-center w-full mb-16`}
     >
-      <div className={`relative group w-full md:max-w-2xl overflow-hidden mx-auto py-2`}>
+      <div className={`relative group w-full md:max-w-2xl overflow-hidden mx-auto py-2`} style={{maxWidth: 760}}>
         {item.type === 'photo' ? (
-          <img
-            src={getImageUrl(item.src)}
-            alt={item.caption}
-            className="w-full h-auto max-h-[35vh] rounded-2xl shadow-2xl border border-white/10 object-contain transform transition-transform duration-300 group-hover:scale-[1.02] mx-auto"
-            loading="lazy"
-          />
+          <div
+            className="w-full rounded-2xl shadow-2xl border border-white/10 overflow-hidden mx-auto"
+            style={{ maxWidth: 720, background: 'linear-gradient(180deg,#ffffff06,#00000006)', height: 'clamp(180px, 28vh, 360px)' }}
+          >
+            <img
+              src={getImageUrl(item.src)}
+              alt={item.caption}
+              className="rounded-2xl transform transition-transform duration-300 group-hover:scale-[1.02]"
+              loading="lazy"
+              style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', maxWidth: '720px' }}
+            />
+          </div>
         ) : (
-          <div className="relative overflow-hidden rounded-2xl">
+          <div
+            className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 mx-auto"
+            style={{ maxWidth: 720, background: '#000' }}
+          >
             <video
               ref={videoRef}
-              src={item.src}
+              src={resolvePublicPath(item.src)}
               autoPlay
               muted
               loop
               playsInline
+              controls
               preload="metadata"
-              className="w-full h-auto max-h-[35vh] rounded-2xl shadow-2xl border border-white/10 bg-black cursor-pointer object-contain mx-auto block"
+              poster={getVideoPoster(item.src)}
+              className="bg-black cursor-pointer block"
+              style={{ width: '100%', height: 'clamp(180px, 28vh, 360px)', maxWidth: '720px', display: 'block', objectFit: 'cover' }}
               onClick={() => {
                 const v = videoRef.current
                 if (!v) return
