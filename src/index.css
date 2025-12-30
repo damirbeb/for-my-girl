@@ -1,6 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Quicksand:wght@400;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Use casual/informal font */
+body {
+  font-family: 'Quicksand', 'Comfortaa', system-ui, sans-serif;
+}
+
+html {
+  font-family: 'Quicksand', 'Comfortaa', system-ui, sans-serif;
+}
 
 /* Custom gallery tweaks (kept minimal; Tailwind handles most utilities) */
 .shadow-2xl { box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
@@ -59,4 +70,19 @@ img, video {
   border: none;
   outline: none;
   box-shadow: none;
+}
+
+header, footer {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: 100vw !important;
+}
+
+header h2, footer h2, footer p {
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }

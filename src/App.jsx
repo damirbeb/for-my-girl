@@ -53,24 +53,21 @@ function App() {
             <ProgressBar scaleX={scaleX} />
 
             <div className="w-full flex flex-col items-center">
-              <header className="h-screen w-full flex items-center justify-center text-center">
+              <header className="h-screen w-full flex flex-col items-center justify-center text-center px-4">
                 <motion.div
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1 }}
-                  className="w-full px-4 md:px-6"
+                  className="w-full flex justify-center items-center" // Контейнер-флекс для центрирования
                 >
                   <motion.h2 
-                    className="text-7xl md:text-9xl font-black mb-6 leading-tight"
-                    animate={{ backgroundPosition: ['0%', '100%'] }}
-                    transition={{ duration: 3, repeat: Infinity, repeatType: 'reverse' }}
+                    className="text-5xl sm:text-7xl md:text-8xl lg:text-[140px] font-black leading-tight text-center w-full"
                     style={{
-                      backgroundImage: 'linear-gradient(90deg, rgb(244, 63, 94), rgb(251, 146, 60), rgb(244, 63, 94))',
+                      backgroundImage: 'linear-gradient(90deg, #fff, #ffccd5, #fff)',
                       backgroundSize: '200% auto',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                       backgroundClip: 'text',
-                      letterSpacing: '-0.02em'
                     }}
                   >
                     Лучшие моменты
@@ -91,28 +88,35 @@ function App() {
                 ))}
               </div>
 
-              <footer className="h-screen w-full flex flex-col items-center justify-center text-center px-6">
-                <motion.h2 
-                  whileInView={{ scale: [0.9, 1.1, 1] }}
-                  className="text-6xl md:text-8xl font-black mb-12 leading-tight"
-                  style={{
-                    backgroundImage: 'linear-gradient(90deg, rgb(244, 63, 94), rgb(251, 146, 60), rgb(244, 63, 94))',
-                    backgroundSize: '200% auto',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text'
-                  }}
-                >
-                  ЛЮБЛЮ ТЕБЯ
-                </motion.h2>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.8 }}
-                  className="bg-gradient-to-r from-rose-500/30 to-orange-500/30 backdrop-blur-md rounded-2xl p-8 border border-rose-400/50 max-w-lg mx-auto"
-                >
-                  <p className="text-xl md:text-3xl font-semibold text-white">Жду твою реакцию</p>
-                  <p className="text-gray-200 text-base mt-4">С Новым Годом, вредина ❤️</p>
+              <footer className="h-screen w-full flex flex-col items-center justify-center text-center px-4">
+                <motion.div className="w-full flex flex-col items-center justify-center">
+                  <motion.h2 
+                    className="text-6xl sm:text-8xl md:text-9xl font-black mb-8 text-center w-full"
+                    style={{
+                      backgroundImage: 'linear-gradient(90deg, #f43f5e, #fb923c, #f43f5e)', 
+                      backgroundSize: '200% auto',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    ЛЮБЛЮ ТЕБЯ
+                  </motion.h2>
+                  
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.8 }}
+                    // УБРАЛ ВСЕ ЛИШНИЕ КЛАССЫ, ОСТАВИЛ ТОЛЬКО ЦЕНТРИРОВАНИЕ
+                    className="text-2xl sm:text-4xl md:text-6xl font-bold text-center w-full block"
+                    style={{ 
+                      color: '#ffffff', 
+                      WebkitTextFillColor: '#ffffff', // ПЕРЕБИВАЕМ ПРОЗРАЧНОСТЬ
+                      opacity: 1 
+                    }}
+                  >
+                    С Новым Годом, пися ❤️
+                  </motion.p>
                 </motion.div>
               </footer>
             </div>

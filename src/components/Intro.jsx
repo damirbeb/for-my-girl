@@ -31,7 +31,7 @@ export default function Intro({ startSurprise }) {
 
             <h1 style={{ fontSize: 56, margin: '12px auto', fontWeight: 900, background: 'linear-gradient(90deg, #f43f5e, #fb923c)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', textAlign: 'center', width: '100%' }}>Для самой любимой</h1>
 
-            <p style={{ color: '#e2e8f0', marginBottom: 24, fontSize: 16, lineHeight: 1.6, textAlign: 'center', width: '100%' }}>Я собрал для тебя галерею наших лучших моментов — аккуратно, с музыкой и всей моей любовью 💕</p>
+            <p style={{ color: '#e2e8f0', marginBottom: 24, fontSize: 20, lineHeight: 1.6, textAlign: 'center', width: '100%' }}>Я собрал для тебя галерею лучших моментов - аккуратно, с музыкой и всей моей любовью 💕</p>
 
             <motion.button
               onClick={startSurprise}
