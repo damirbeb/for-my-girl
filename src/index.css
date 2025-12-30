@@ -53,3 +53,10 @@ header h2 { max-width: 42rem; margin: 0 auto; }
 
 /* Ensure content sits above pattern */
 .gallery-bg > * { position: relative; z-index: 1 }
+
+/* Remove borders and outlines from media */
+img, video {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}

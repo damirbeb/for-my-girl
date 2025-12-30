@@ -134,10 +134,10 @@ export default function MediaCard({ item, index, onVideoPlay, onVideoPause }) {
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: '-100px' }}
       transition={{ duration: 0.7 }}
-      className={`flex flex-col items-center w-full mb-4 px-4`}
+      className={`flex flex-col items-center w-full`}
       ref={containerRef}
     >
-      <div className={`relative group w-full flex flex-col items-center`} style={{maxWidth: 720}}>
+      <div className={`relative group flex flex-col items-center`} style={{maxWidth: 720, width: '100%'}}>
         {/* Media card: centers content and keeps proportions */}
         {item.type === 'photo' ? (
           <div
@@ -184,21 +184,20 @@ export default function MediaCard({ item, index, onVideoPlay, onVideoPause }) {
               />
             </div>
           </div>
-        )}}
+        )}
 
         {item.caption && (
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             className={`p-4 bg-gradient-to-r from-black/40 to-black/20 backdrop-blur-sm rounded-xl text-center w-full`}
-            style={{ margin: '12px 0 0 0' }}
+            style={{ margin: '6px 0 28px 0' }}
           >
             <p className="caption" style={{ margin: 0, textAlign: 'center', fontSize: 18, width: '100%' }}>
               {item.caption}
             </p>
           </motion.div>
         )}
-        <div style={{ height: 16 }} />
       </div>
     </motion.div>
   )
