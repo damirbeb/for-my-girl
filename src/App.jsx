@@ -52,8 +52,8 @@ function App() {
           <motion.div key="content" className="relative">
             <ProgressBar scaleX={scaleX} />
 
-            <div className="max-w-3xl mx-auto px-6 py-24 flex flex-col items-center">
-              <header className="h-screen flex items-center justify-center text-center px-6">
+            <div className="w-full flex flex-col items-center px-4 md:px-6 py-24">
+              <header className="h-screen w-full flex items-center justify-center text-center px-4 md:px-6">
                 <motion.div
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -79,7 +79,7 @@ function App() {
               </header>
 
               {/* Рендерим нашу сотку */}
-              <div className="space-y-20 md:space-y-32">
+              <div className="w-full max-w-3xl space-y-20 md:space-y-32 mx-auto">
                 {mediaItems.map((item, index) => (
                   <MediaCard
                     key={item.id}

@@ -1,10 +1,16 @@
 import { useRef, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
+// Global state to track which video is currently playing
+let currentPlayingVideo = null
+let playingVideoIndex = null
+
 export default function MediaCard({ item, index, onVideoPlay, onVideoPause }) {
   const isEven = index % 2 === 0
   const videoRef = useRef(null)
+  const containerRef = useRef(null)
   const reportedPlaying = useRef(false)
+  const hasAutoPlayed = useRef(false)
 
   const getImageUrl = (path) => {
     const name = path.split('/').pop()
@@ -28,9 +34,61 @@ export default function MediaCard({ item, index, onVideoPlay, onVideoPause }) {
 
   const [isPlaying, setIsPlaying] = useState(false)
 
+  // Intersection Observer for smart video autoplay
+  useEffect(() => {
+    if (item.type !== 'video') return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const v = videoRef.current
+        if (!v) return
+
+        if (entry.isIntersecting && !hasAutoPlayed.current) {
+          hasAutoPlayed.current = true
+
+          // Stop any currently playing video
+          if (currentPlayingVideo && currentPlayingVideo !== videoRef.current) {
+            currentPlayingVideo.pause()
+            currentPlayingVideo.muted = true
+            if (playingVideoIndex !== null) {
+              onVideoPause()
+            }
+          }
+
+          // Play this video with sound
+          currentPlayingVideo = v
+          playingVideoIndex = index
+          v.muted = false
+          v.play().catch(() => {})
+          setIsPlaying(true)
+          onVideoPlay()
+        } else if (!entry.isIntersecting && hasAutoPlayed.current) {
+          // Stop video when scrolled away
+          v.pause()
+          v.muted = true
+          if (currentPlayingVideo === v) {
+            currentPlayingVideo = null
+            playingVideoIndex = null
+            onVideoPause()
+          }
+          hasAutoPlayed.current = false
+        }
+      },
+      { threshold: 0.5 }
+    )
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current)
+    }
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [item.type, index, onVideoPlay, onVideoPause])
+
   useEffect(() => {
     const v = videoRef.current
-    if (!v) return
+    if (!v || item.type !== 'video') return
 
     const handlePlay = () => {
       if (!v.muted && !reportedPlaying.current) {
@@ -68,24 +126,25 @@ export default function MediaCard({ item, index, onVideoPlay, onVideoPause }) {
       v.removeEventListener('ended', handlePause)
       v.removeEventListener('volumechange', handleVolumeChange)
     }
-  }, [onVideoPlay, onVideoPause])
+  }, [onVideoPlay, onVideoPause, item.type])
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: isEven ? -30 : 30 }}
+      initial={{ opacity: 0, x: 0 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: '-100px' }}
       transition={{ duration: 0.7 }}
-      className={`flex flex-col items-center w-full mb-16`}
+      className={`flex flex-col items-center w-full mb-4 px-4`}
+      ref={containerRef}
     >
-      <div className={`relative group w-full md:max-w-2xl overflow-hidden mx-auto py-2`} style={{maxWidth: 760}}>
+      <div className={`relative group w-full flex flex-col items-center`} style={{maxWidth: 720}}>
         {/* Media card: centers content and keeps proportions */}
         {item.type === 'photo' ? (
           <div
-            className="w-full rounded-2xl shadow-2xl overflow-hidden mx-auto"
-            style={{ maxWidth: 720, background: '#0b0b0b', height: 'auto' }}
+            className="w-full rounded-2xl shadow-2xl overflow-hidden"
+            style={{ maxWidth: '100%', background: '#0b0b0b', height: 'auto' }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 8, background: 'transparent' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0, background: 'transparent' }}>
               <img
                 src={getImageUrl(item.src)}
                 alt={item.caption}
@@ -97,8 +156,8 @@ export default function MediaCard({ item, index, onVideoPlay, onVideoPause }) {
           </div>
         ) : (
           <div
-            className="relative rounded-2xl overflow-hidden shadow-2xl mx-auto"
-            style={{ maxWidth: 720, background: '#000' }}
+            className="relative rounded-2xl overflow-hidden shadow-2xl"
+            style={{ maxWidth: '100%', background: '#000' }}
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000' }}>
               <video
@@ -108,11 +167,10 @@ export default function MediaCard({ item, index, onVideoPlay, onVideoPause }) {
                 muted
                 loop
                 playsInline
-                controls
                 preload="metadata"
                 poster={getVideoPoster(item.src)}
                 className="bg-black cursor-pointer block"
-                style={{ width: '100%', height: 'auto', maxWidth: '720px', display: 'block', objectFit: 'contain' }}
+                style={{ width: '100%', height: 'auto', maxWidth: '100%', display: 'block', objectFit: 'contain', borderRadius: 16 }}
                 onClick={() => {
                   const v = videoRef.current
                   if (!v) return
@@ -126,20 +184,21 @@ export default function MediaCard({ item, index, onVideoPlay, onVideoPause }) {
               />
             </div>
           </div>
-        )}
+        )}}
 
         {item.caption && (
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className={`p-4 bg-gradient-to-r from-black/40 to-black/20 backdrop-blur-sm rounded-xl border border-white/5 text-center`}
-            style={{ maxWidth: 720, margin: '4px auto 0' }}
+            className={`p-4 bg-gradient-to-r from-black/40 to-black/20 backdrop-blur-sm rounded-xl text-center w-full`}
+            style={{ margin: '12px 0 0 0' }}
           >
-            <p className="caption" style={{ margin: 0, textAlign: 'center', fontSize: 18 }}>
+            <p className="caption" style={{ margin: 0, textAlign: 'center', fontSize: 18, width: '100%' }}>
               {item.caption}
             </p>
           </motion.div>
         )}
+        <div style={{ height: 16 }} />
       </div>
     </motion.div>
   )
