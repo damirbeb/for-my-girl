@@ -7,23 +7,23 @@ export default function Intro({ startSurprise }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 bg-black"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-black via-neutral-900 to-slate-900"
     >
       <motion.h1 
         initial={{ y: 20 }}
         animate={{ y: 0 }}
-        className="text-5xl md:text-7xl font-black mb-8 text-center bg-gradient-to-r from-red-500 to-pink-500 bg-clip-text text-transparent"
+        className="text-5xl md:text-7xl font-black mb-4 text-center bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text text-transparent"
       >
-        ПРИВЕТ, КУКОЛКА ❤️
+        Для самой любимой ❤️
       </motion.h1>
 
-      <p className="text-gray-300 mb-8 text-center max-w-xl">Я собрал для тебя эту галерею — тут наши фото, видео и маленькие подписи. Нажми кнопку и наслаждайся. Совет: положи на место `public/sounds/main-music.mp3` — он будет фоном.</p>
+      <p className="text-gray-300 mb-8 text-center max-w-lg">Я подготовил для тебя эту галерею — лучшие моменты, аккуратно и с музыкой. Нажми кнопку, чтобы открыть.</p>
 
       <button 
         onClick={startSurprise}
-        className="group relative px-12 py-6 bg-white text-black font-bold text-2xl rounded-full transition-all hover:scale-105 active:scale-95 shadow-xl"
+        className="group relative px-12 py-5 bg-white text-black font-bold text-lg rounded-full transition-all hover:scale-105 active:scale-95 shadow-xl"
       >
-        Открыть сюрприз
+        ОТКРЫТЬ
       </button>
     </motion.div>
   )

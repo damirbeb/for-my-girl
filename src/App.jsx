@@ -43,7 +43,6 @@ function App() {
 
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-red-500">
-      {/* Add your music file here: public/sounds/main-music.mp3 */}
       <audio ref={audioRef} loop src="/sounds/main-music.mp3" />
 
       <AnimatePresence>
@@ -53,23 +52,23 @@ function App() {
           <motion.div key="content" className="relative">
             <ProgressBar scaleX={scaleX} />
 
-            <div className="max-w-4xl mx-auto px-4 py-20">
+            <div className="max-w-3xl mx-auto px-6 py-24 flex flex-col items-center">
               <header className="h-screen flex items-center justify-center text-center">
                 <motion.div
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1 }}
                 >
-                  <h2 className="text-3xl md:text-5xl font-light italic text-gray-400">
+                  <h2 className="text-3xl md:text-5xl font-light italic text-gray-400 leading-relaxed">
                     «Тони Старк собрал мини-реактор в яме... <br/>
                     <span className="text-white not-italic font-bold">а я собрал это для тебя»</span>
                   </h2>
-                  <p className="mt-10 animate-bounce text-gray-600 text-sm tracking-widest uppercase">Листай вниз</p>
+                  <p className="mt-8 animate-bounce text-gray-400 text-sm tracking-wide uppercase">Листай вниз</p>
                 </motion.div>
               </header>
 
               {/* Рендерим нашу сотку */}
-              <div className="space-y-32 md:space-y-64">
+              <div className="space-y-12 md:space-y-20">
                 {mediaItems.map((item, index) => (
                   <MediaCard
                     key={item.id}

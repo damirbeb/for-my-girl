@@ -3,12 +3,30 @@
 /* Gallery tweaks */
 .shadow-2xl { box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
 .backdrop-blur-sm { backdrop-filter: blur(6px); }
-.group-hover\:scale-105:hover { transform: scale(1.05); }
+.group-hover\:scale-105:hover { transform: scale(1.03); }
 
 /* Make images look cinematic */
 .rounded-2xl { border-radius: 1rem; }
 
+/* Caption style */
+.caption {
+  font-size: 1.125rem;
+  line-height: 1.25;
+  font-weight: 600;
+  color: #f8fafc;
+  letter-spacing: 0.2px;
+  text-shadow: 0 6px 30px rgba(0,0,0,0.6);
+  margin: 0;
+}
+
+/* Subtle header constraint */
+header h2 { max-width: 42rem; margin: 0 auto; }
+
 /* Nice small responsive tweaks */
 @media (min-width: 768px) {
-	.md\:max-w-\[70\%\] { max-width: 70%; }
+  .md\:max-w-\[55\%\] { max-width: 55%; }
+}
+
+@media (min-width: 1024px) {
+  .caption { font-size: 1.5rem; }
 }
