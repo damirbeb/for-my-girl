@@ -140,50 +140,36 @@ export default function MediaCard({ item, index, onVideoPlay, onVideoPause }) {
       <div className={`relative group flex flex-col items-center`} style={{maxWidth: 720, width: '100%'}}>
         {/* Media card: centers content and keeps proportions */}
         {item.type === 'photo' ? (
-          <div
-            className="w-full rounded-2xl shadow-2xl overflow-hidden"
-            style={{ maxWidth: '100%', background: '#0b0b0b', height: 'auto' }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0, background: 'transparent' }}>
-              <img
-                src={getImageUrl(item.src)}
-                alt={item.caption}
-                className="rounded-2xl transform transition-transform duration-300 group-hover:scale-[1.02]"
-                loading="lazy"
-                style={{ display: 'block', maxWidth: '100%', width: '100%', height: 'auto', objectFit: 'contain' }}
-              />
-            </div>
-          </div>
+          <img
+            src={getImageUrl(item.src)}
+            alt={item.caption}
+            className="rounded-2xl shadow-2xl transform transition-transform duration-300 group-hover:scale-[1.02]"
+            loading="lazy"
+            style={{ display: 'block', maxHeight: '45vh', maxWidth: '100%', width: '100%', height: 'auto', objectFit: 'contain' }}
+          />
         ) : (
-          <div
-            className="relative rounded-2xl overflow-hidden shadow-2xl"
-            style={{ maxWidth: '100%', background: '#000' }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000' }}>
-              <video
-                ref={videoRef}
-                src={resolvePublicPath(item.src)}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                poster={getVideoPoster(item.src)}
-                className="bg-black cursor-pointer block"
-                style={{ width: '100%', height: 'auto', maxWidth: '100%', display: 'block', objectFit: 'contain', borderRadius: 16 }}
-                onClick={() => {
-                  const v = videoRef.current
-                  if (!v) return
-                  if (v.paused) {
-                    v.muted = false
-                    v.play().catch(() => {})
-                  } else {
-                    v.pause()
-                  }
-                }}
-              />
-            </div>
-          </div>
+          <video
+            ref={videoRef}
+            src={resolvePublicPath(item.src)}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={getVideoPoster(item.src)}
+            className="rounded-2xl shadow-2xl cursor-pointer"
+            style={{ width: '100%', height: 'auto', maxHeight: '45vh', maxWidth: '100%', display: 'block', objectFit: 'contain' }}
+            onClick={() => {
+              const v = videoRef.current
+              if (!v) return
+              if (v.paused) {
+                v.muted = false
+                v.play().catch(() => {})
+              } else {
+                v.pause()
+              }
+            }}
+          />
         )}
 
         {item.caption && (

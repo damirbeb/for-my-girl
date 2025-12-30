@@ -52,13 +52,13 @@ function App() {
           <motion.div key="content" className="relative">
             <ProgressBar scaleX={scaleX} />
 
-            <div className="w-full flex flex-col items-center px-4 md:px-6 py-24">
-              <header className="h-screen w-full flex items-center justify-center text-center px-4 md:px-6">
+            <div className="w-full flex flex-col items-center">
+              <header className="h-screen w-full flex items-center justify-center text-center">
                 <motion.div
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1 }}
-                  className="w-full"
+                  className="w-full px-4 md:px-6"
                 >
                   <motion.h2 
                     className="text-7xl md:text-9xl font-black mb-6 leading-tight"
@@ -91,14 +91,29 @@ function App() {
                 ))}
               </div>
 
-              <footer className="h-screen flex flex-col items-center justify-center text-center">
+              <footer className="h-screen w-full flex flex-col items-center justify-center text-center px-6">
                 <motion.h2 
                   whileInView={{ scale: [0.9, 1.1, 1] }}
-                  className="text-5xl md:text-8xl font-black mb-10"
+                  className="text-6xl md:text-8xl font-black mb-12 leading-tight"
+                  style={{
+                    backgroundImage: 'linear-gradient(90deg, rgb(244, 63, 94), rgb(251, 146, 60), rgb(244, 63, 94))',
+                    backgroundSize: '200% auto',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}
                 >
                   ЛЮБЛЮ ТЕБЯ
                 </motion.h2>
-                <p className="text-gray-500">С Новым Годом, вредина ❤️</p>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3, duration: 0.8 }}
+                  className="bg-gradient-to-r from-rose-500/30 to-orange-500/30 backdrop-blur-md rounded-2xl p-8 border border-rose-400/50 max-w-lg mx-auto"
+                >
+                  <p className="text-xl md:text-3xl font-semibold text-white">Жду твою реакцию</p>
+                  <p className="text-gray-200 text-base mt-4">С Новым Годом, вредина ❤️</p>
+                </motion.div>
               </footer>
             </div>
           </motion.div>
