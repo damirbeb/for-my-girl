@@ -21,7 +21,7 @@ function App() {
   const startSurprise = () => {
     setIsStarted(true)
     if (audioRef.current) {
-      audioRef.current.volume = 0.6
+      audioRef.current.volume = 0.3
       audioRef.current.play().catch(e => console.log("Браузер блочит звук:", e))
     }
   }
@@ -31,9 +31,9 @@ function App() {
     const audio = audioRef.current
     if (!audio) return
     if (playingVideos > 0) {
-      audio.volume = 0.15
+      audio.volume = 0.1
     } else {
-      audio.volume = 1
+      audio.volume = 0.3
     }
   }, [playingVideos])
 
