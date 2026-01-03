@@ -32,7 +32,7 @@ export const mediaItems = [
   { id: 31, type: 'video', src: '/videos/31.mp4', caption: 'Ну красотка' },
   { id: 32, type: 'photo', src: 'src/assets/32.jpg', caption: 'Ждешь меня в машие' },
   { id: 33, type: 'photo', src: 'src/assets/33.jpg', caption: 'Пися' },
-  { id: 34, type: 'photo', src: 'src/assets/34.jpg', caption: 'Лежим' },
+  /*{ id: 34, type: 'photo', src: 'src/assets/34.jpg', caption: 'Лежим' },*/
   { id: 35, type: 'photo', src: 'src/assets/35.jpg', caption: 'Это я целовал' },
   { id: 36, type: 'photo', src: 'src/assets/36.jpg', caption: 'А тут не целовал' },
   { id: 37, type: 'photo', src: 'src/assets/37.jpg', caption: 'Уехала и все - капец' },
@@ -69,7 +69,7 @@ export const mediaItems = [
   { id: 68, type: 'photo', src: 'src/assets/68.jpg', caption: 'Красотка' },
   { id: 69, type: 'photo', src: 'src/assets/69.jpg', caption: 'Сидит в моей футболке' },
   { id: 70, type: 'photo', src: 'src/assets/70.jpg', caption: 'Просишь кофе' },
-  { id: 71, type: 'photo', src: 'src/assets/71.jpg', caption: 'Лежим на пикнике' },
+  /*{ id: 71, type: 'photo', src: 'src/assets/71.jpg', caption: 'Лежим на пикнике' },*/
   { id: 72, type: 'photo', src: 'src/assets/72.jpg', caption: 'Челку укладываешь' },
   { id: 73, type: 'photo', src: 'src/assets/73.jpg', caption: 'Не получилось' },
   { id: 74, type: 'photo', src: 'src/assets/74.jpg', caption: 'Зато сфоткались' },
@@ -80,7 +80,7 @@ export const mediaItems = [
   { id: 79, type: 'photo', src: 'src/assets/79.jpg', caption: 'Работаешь' },
   { id: 80, type: 'photo', src: 'src/assets/80.jpg', caption: 'работаешь' },
   { id: 81, type: 'photo', src: 'src/assets/81.jpg', caption: 'Подарил тебе медведя' },
-  { id: 82, type: 'video', src: '/videos/82.mp4', caption: 'А ты мне красивое видео' },
+  /*{ id: 82, type: 'video', src: '/videos/82.mp4', caption: 'А ты мне красивое видео' },*/
   { id: 83, type: 'photo', src: 'src/assets/83.jpg', caption: 'Наелась и отдыхает' },
   { id: 84, type: 'photo', src: 'src/assets/84.jpg', caption: 'Телефон нюхаешь' },
   { id: 85, type: 'photo', src: 'src/assets/85.jpg', caption: 'Не понравилось' },
